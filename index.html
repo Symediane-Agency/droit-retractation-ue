@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Droit de rétractation UE — Guide de mise en conformité Shopify</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1a2333;
+    --muted: #5b6474;
+    --accent: #1f5eff;
+    --accent-soft: #e8eeff;
+    --border: #e2e6ec;
+    --ok: #1a7f4e;
+    --ok-soft: #e6f4ec;
+    --warn: #b45309;
+    --warn-soft: #fdf3e3;
+    --danger: #b3261e;
+    --danger-soft: #fbeae9;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .layout { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; gap: 40px; }
+  /* ---------- Sidebar ---------- */
+  nav.toc {
+    width: 240px; flex-shrink: 0; position: sticky; top: 32px;
+    align-self: flex-start; padding-top: 48px; font-size: 14px;
+  }
+  nav.toc .toc-title { font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+  nav.toc a { display: block; color: var(--muted); text-decoration: none; padding: 5px 10px; border-left: 2px solid var(--border); }
+  nav.toc a:hover { color: var(--accent); }
+  nav.toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+  main { flex: 1; min-width: 0; padding: 48px 0 96px; }
+  /* ---------- Typo ---------- */
+  h1 { font-size: 30px; line-height: 1.25; margin-bottom: 8px; }
+  .subtitle { color: var(--muted); font-size: 17px; margin-bottom: 24px; }
+  h2 { font-size: 22px; margin: 56px 0 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  h3 { font-size: 17px; margin: 24px 0 8px; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 12px 22px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--accent); }
+  code, .path {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13.5px; background: var(--accent-soft); color: var(--ink);
+    padding: 2px 6px; border-radius: 5px; white-space: nowrap;
+  }
+  /* ---------- Composants ---------- */
+  .badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; margin-bottom: 14px; }
+  .badge.deadline { background: var(--danger-soft); color: var(--danger); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+  .callout { border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 16px 0; }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.ok { border-left-color: var(--ok); background: var(--ok-soft); }
+  .callout p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: #fafbfc; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  tr:last-child td { border-bottom: none; }
+  /* ---------- Étapes ---------- */
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 20px; }
+  .step-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .step-num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 15px;
+    display: inline-flex; align-items: center; justify-content: center; transform: translateY(6px);
+  }
+  .step-head h3 { margin: 0; font-size: 18px; }
+  .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
+  .tag.optional { background: var(--warn-soft); color: var(--warn); }
+  /* ---------- Captures d'écran ---------- */
+  figure.shot { margin: 18px 0 6px; }
+  figure.shot img { max-width: 100%; border: 1px solid var(--border); border-radius: 8px; display: block; }
+  figure.shot figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .shot-placeholder {
+    border: 2px dashed #c3cad6; border-radius: 8px; background: #fbfcfe;
+    padding: 28px 20px; text-align: center; color: var(--muted); font-size: 14px;
+  }
+  .shot-placeholder .fname { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--ink); background: var(--accent-soft); padding: 2px 8px; border-radius: 5px; }
+  /* ---------- Checklist ---------- */
+  .checklist { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 0; }
+  .checklist label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 22px; cursor: pointer; border-bottom: 1px solid var(--border); }
+  .checklist label:last-child { border-bottom: none; }
+  .checklist input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--ok); flex-shrink: 0; cursor: pointer; }
+  .checklist label.done span { color: var(--muted); text-decoration: line-through; }
+  .progress-wrap { margin: 14px 0 20px; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--ok); border-radius: 99px; transition: width .3s ease; }
+  .progress-label { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  footer.doc-footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+  @media (max-width: 900px) {
+    nav.toc { display: none; }
+    .layout { display: block; }
+  }
+  @media print {
+    nav.toc { display: none; }
+    body { background: #fff; }
+    .step, .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc" id="toc">
+  <div class="toc-title">Sommaire</div>
+  <a href="#en-bref">En bref</a>
+  <a href="#la-loi">Ce que dit la loi</a>
+  <a href="#concerne">Qui est concerné</a>
+  <a href="#sanctions">Sanctions</a>
+  <a href="#mise-en-place">Mise en place dans Shopify</a>
+  <a href="#experience-client">Ce que verra le client</a>
+  <a href="#checklist">Checklist de conformité</a>
+  <a href="#faq">Questions fréquentes</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<main>
+
+<span class="badge deadline">Obligatoire depuis le 19 juin 2026</span>
+<h1>Droit de rétractation UE : mise en conformité de votre boutique Shopify</h1>
+<p class="subtitle">Guide pratique pour respecter la directive européenne 2023/2673 (« bouton de rétractation ») avec les outils intégrés de Shopify.</p>
+
+<div class="callout warn">
+  <p><strong>Avertissement.</strong> Ce document est un guide technique et informatif, pas un conseil juridique. La conformité finale dépend de votre activité, de vos produits et de vos marchés. En cas de doute, consultez un conseiller juridique.</p>
+</div>
+
+<h2 id="en-bref">En bref</h2>
+<p>Depuis le <strong>19 juin 2026</strong>, toute boutique en ligne qui vend à des consommateurs de l'Union européenne doit proposer une <strong>fonction de rétractation électronique</strong> : un bouton ou lien clairement visible permettant au client d'annuler sa commande ou de la retourner directement depuis la boutique, sans avoir à contacter le support.</p>
+<p>Shopify ne fournit pas un « bouton magique » unique, mais une combinaison de fonctionnalités natives qui, correctement configurées ensemble, répondent aux exigences :</p>
+<ul>
+  <li>les <strong>retours et annulations en libre-service</strong> (le client agit seul depuis son compte) ;</li>
+  <li>les <strong>règles de retour et d'annulation</strong> (délai de 14 jours minimum, annulation avant expédition) ;</li>
+  <li>un <strong>lien visible</strong> dans la boutique vers l'espace client ;</li>
+  <li>les <strong>e-mails de confirmation automatiques</strong> envoyés à chaque demande.</li>
+</ul>
+
+<h2 id="la-loi">Ce que dit la loi</h2>
+<p>La directive (UE) 2023/2673 modifie la directive 2011/83/UE relative aux droits des consommateurs. Elle complète le droit de rétractation existant (14 jours pour annuler un achat à distance sans motif) par une nouvelle obligation technique, applicable aux contrats conclus via une interface en ligne.</p>
+
+<table>
+  <tr><th>Exigence légale</th><th>Concrètement</th></tr>
+  <tr>
+    <td><strong>Fonction de rétractation visible</strong></td>
+    <td>Un bouton ou lien clairement libellé (par exemple « Se rétracter du contrat »), facile à trouver, accessible en continu pendant tout le délai de rétractation.</td>
+  </tr>
+  <tr>
+    <td><strong>Processus en deux étapes</strong></td>
+    <td>1) Le client active la fonction de rétractation. 2) Il confirme sa demande en fournissant son nom et les détails de la commande concernée.</td>
+  </tr>
+  <tr>
+    <td><strong>Accusé de réception automatique</strong></td>
+    <td>La boutique envoie immédiatement une confirmation de la demande sur un support durable (e-mail), avec date et heure.</td>
+  </tr>
+  <tr>
+    <td><strong>Délai de 14 jours</strong></td>
+    <td>Le délai court à partir de la livraison du <em>dernier</em> article de la commande. Le client doit aussi pouvoir annuler à tout moment avant la livraison.</td>
+  </tr>
+  <tr>
+    <td><strong>Remboursement sous 14 jours</strong></td>
+    <td>Après la demande de rétractation, le remboursement doit intervenir dans un délai de 14 jours.</td>
+  </tr>
+</table>
+
+<h2 id="concerne">Qui est concerné</h2>
+<p>La directive s'applique à <strong>toute entreprise vendant en ligne des biens, services ou contenus numériques à des consommateurs de l'UE, quel que soit le pays où l'entreprise est établie</strong>. Une boutique suisse, britannique ou américaine qui livre en France ou en Allemagne, affiche des prix en euros ou traduit son site pour un marché européen est concernée.</p>
+<p>Certains produits sont exonérés du droit de rétractation de 14 jours (produits périssables, personnalisés, contenus numériques déjà consommés, produits d'hygiène descellés, etc.). Ces exonérations existaient déjà avant 2026 et restent valables. Dans Shopify, elles se gèrent via les « articles en vente finale » (voir étape 2).</p>
+
+<h2 id="sanctions">Sanctions en cas de non-conformité</h2>
+<ul>
+  <li>Avertissements juridiques et mises en demeure (les concurrents et associations de consommateurs peuvent agir, notamment en Allemagne).</li>
+  <li>Amendes pouvant atteindre <strong>4 % du chiffre d'affaires annuel</strong> dans certains États membres.</li>
+  <li>Extension automatique du délai de rétractation jusqu'à <strong>12 mois et 14 jours</strong> si la fonction n'est pas proposée.</li>
+</ul>
+
+<h2 id="mise-en-place">Mise en place dans Shopify</h2>
+<p>Les étapes ci-dessous utilisent uniquement des fonctionnalités natives de Shopify, sans application tierce. Prérequis : la boutique doit utiliser la <strong>nouvelle version des comptes clients</strong> (connexion par code e-mail), car le libre-service ne fonctionne pas avec les comptes clients classiques.</p>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">1</span><h3>Activer les retours et annulations en libre-service</h3></div>
+  <ol>
+    <li>Dans l'interface administrateur Shopify, allez dans <span class="path">Paramètres &gt; Comptes clients</span>.</li>
+    <li>Dans la section <strong>Comptes clients</strong>, activez les <strong>retours en libre-service</strong> et sélectionnez l'option couvrant les <strong>demandes de retour et d'annulation</strong>.</li>
+  </ol>
+  <p>C'est cette fonctionnalité qui constitue la « fonction de rétractation électronique » : le client se connecte à son compte et soumet lui-même sa demande, avec confirmation en deux étapes et e-mail automatique.</p>
+  <figure class="shot">
+    <img src="images/01-comptes-clients-libre-service.png" alt="Paramètres Comptes clients : activation des retours en libre-service">
+    <figcaption>Paramètres &gt; Comptes clients — activation des retours et annulations en libre-service.</figcaption>
+  </figure>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">2</span><h3>Configurer les règles de retour</h3></div>
+  <ol>
+    <li>Allez dans <span class="path">Paramètres &gt; Politiques</span>.</li>
+    <li>Dans la section <strong>Règles de retour et d'annulation</strong>, ouvrez la règle à modifier.</li>
+    <li>Délai de retour : sélectionnez <strong>14 jours minimum</strong>.</li>
+    <li>Point de départ (« À partir de ») : sélectionnez <strong>Livraison du dernier article de la commande</strong>.</li>
+    <li>Cochez l'option d'<strong>extension pour les week-ends et jours fériés</strong> (si le dernier jour du délai tombe un week-end ou un jour férié, il est reporté au jour ouvrable suivant).</li>
+    <li>Facultatif : déclarez vos produits exonérés (périssables, personnalisés...) comme <strong>articles en vente finale</strong>.</li>
+    <li>Cliquez sur <strong>Enregistrer</strong>, puis <strong>Activer</strong>.</li>
+  </ol>
+  <figure class="shot">
+    <img src="images/02-regles-retour.png" alt="Règles de retour : délai de 14 jours à partir de la livraison du dernier article">
+    <figcaption>Paramètres &gt; Politiques — délai de retour de 14 jours à partir de la livraison du dernier article.</figcaption>
+  </figure>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">3</span><h3>Configurer les règles d'annulation</h3></div>
+  <p>Le client doit pouvoir se rétracter aussi <em>avant</em> la livraison. Les règles d'annulation couvrent les articles non encore expédiés.</p>
+  <ol>
+    <li>Dans la même section <span class="path">Paramètres &gt; Politiques &gt; Règles de retour et d'annulation</span>, activez les <strong>demandes d'annulation</strong>.</li>
+    <li>Fenêtre d'annulation : sélectionnez <strong>Jusqu'au traitement de l'article</strong> (« Until item is fulfilled »), pour que le client puisse annuler à tout moment avant l'expédition.</li>
+    <li>Cliquez sur <strong>Enregistrer</strong>.</li>
+  </ol>
+  <figure class="shot">
+    <img src="images/03-regles-annulation.png" alt="Règles d'annulation : fenêtre jusqu'au traitement de l'article">
+    <figcaption>Règles d'annulation — fenêtre réglée sur « Jusqu'au traitement de l'article ».</figcaption>
+  </figure>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">4</span><h3>Ajouter un lien de rétractation visible dans la boutique</h3></div>
+  <p>La loi exige que la fonction soit <strong>facile à trouver</strong>. Ajoutez un lien clairement libellé vers l'espace client, au minimum dans le pied de page.</p>
+  <ol>
+    <li>Copiez l'<strong>URL des comptes clients</strong> depuis <span class="path">Paramètres &gt; Comptes clients</span>.</li>
+    <li>Allez dans <span class="path">Contenu &gt; Menus</span>, ouvrez le <strong>Menu du pied de page</strong>.</li>
+    <li>Ajoutez un élément de menu avec un libellé explicite, par exemple <strong>« Se rétracter / annuler ma commande »</strong> ou <strong>« Retours et rétractation »</strong>, pointant vers l'URL des comptes clients.</li>
+    <li>Ajoutez aussi ce lien dans votre <strong>politique de remboursement</strong> (<span class="path">Paramètres &gt; Politiques</span>) et, idéalement, sur une page dédiée « Retours ».</li>
+  </ol>
+  <div class="callout">
+    <p>Si vous vendez sur plusieurs marchés, vous pouvez définir un menu différent par marché et n'afficher ce point d'entrée que pour les vitrines destinées à l'UE.</p>
+  </div>
+  <figure class="shot">
+    <img src="images/04-url-comptes-clients.png" alt="Copie de l'URL des comptes clients">
+    <figcaption>Paramètres &gt; Comptes clients — copie de l'URL des comptes clients.</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="images/05-menu-pied-de-page.png" alt="Ajout du lien de rétractation dans le menu du pied de page">
+    <figcaption>Contenu &gt; Menus — ajout du lien dans le pied de page.</figcaption>
+  </figure>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">5</span><h3>Règles différentes par marché <span class="tag optional">Facultatif</span></h3></div>
+  <p>Si vous ne voulez pas appliquer les conditions UE au monde entier (par exemple garder un délai de retour plus court hors UE), créez une règle spécifique au marché Union européenne.</p>
+  <ol>
+    <li>Dans <span class="path">Paramètres &gt; Politiques &gt; Règles de retour et d'annulation</span>, cliquez sur <strong>Ajouter des règles</strong>.</li>
+    <li>Dans le champ <strong>Admissibilité</strong>, sélectionnez vos marchés UE.</li>
+    <li>Appliquez-y les réglages des étapes 2 et 3 (14 jours, dernier article, annulation jusqu'au traitement).</li>
+  </ol>
+  <div class="callout warn">
+    <p>Cette fonctionnalité de règles par marché est en accès anticipé chez Shopify et peut ne pas être disponible sur toutes les boutiques. À défaut, appliquez les réglages UE comme règle par défaut.</p>
+  </div>
+  <figure class="shot">
+    <img src="images/06-regles-par-marche.png" alt="Création d'une règle de retour spécifique au marché UE">
+    <figcaption>Règle de retour et d'annulation spécifique au marché Union européenne.</figcaption>
+  </figure>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">6</span><h3>Mettre à jour la politique écrite de retour et remboursement</h3></div>
+  <ol>
+    <li>Dans <span class="path">Paramètres &gt; Politiques &gt; Politiques écrites</span>, ouvrez la <strong>Politique de retour et de remboursement</strong>.</li>
+    <li>Mentionnez explicitement : le droit de rétractation de 14 jours, son point de départ (livraison du dernier article), la possibilité d'annuler avant expédition, la marche à suivre (lien vers l'espace client) et le délai de remboursement de 14 jours.</li>
+  </ol>
+  <p>Cette politique s'affiche automatiquement dans le pied de page des pages de paiement. Le modèle généré par Shopify n'existe qu'en anglais : pour une boutique en français, rédigez votre propre texte.</p>
+</div>
+
+<div class="step">
+  <div class="step-head"><span class="step-num">7</span><h3>Traiter les demandes dans les délais</h3></div>
+  <p>La configuration ne suffit pas, le processus opérationnel compte aussi :</p>
+  <ul>
+    <li>Chaque demande de retour ou d'annulation déclenche une notification dans l'admin : <strong>traitez-les rapidement</strong>.</li>
+    <li>Pour les commandes UE, le <strong>remboursement doit être émis sous 14 jours</strong> après la demande de rétractation.</li>
+    <li>Vérifiez les modèles d'e-mails dans <span class="path">Paramètres &gt; Notifications &gt; Retours</span> (confirmation de demande, approbation, refus) : la confirmation automatique de la demande fait office d'accusé de réception exigé par la directive.</li>
+  </ul>
+</div>
+
+<h2 id="experience-client">Ce que verra le client</h2>
+<p>Une fois la configuration en place, le parcours du client est le suivant :</p>
+<ol>
+  <li>Il clique sur le lien « Retours et rétractation » de la boutique (ou se connecte à son compte).</li>
+  <li>Il s'identifie avec son adresse e-mail et un code de vérification à six chiffres (aucun mot de passe requis).</li>
+  <li>Il sélectionne la commande, puis les articles à annuler (si non expédiés) ou à retourner (si livrés).</li>
+  <li>Il choisit un motif et confirme sa demande : c'est la confirmation en deux étapes exigée par la directive.</li>
+  <li>Il reçoit immédiatement un e-mail de confirmation de sa demande.</li>
+</ol>
+<figure class="shot">
+  <img src="images/07-parcours-client.png" alt="Vue client : demande de retour depuis le compte client">
+  <figcaption>Espace client — demande de retour ou d'annulation en libre-service.</figcaption>
+</figure>
+
+<h2 id="checklist">Checklist de conformité</h2>
+<p>Cochez chaque point une fois vérifié sur la boutique. La progression est enregistrée dans votre navigateur.</p>
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel"></div>
+</div>
+<div class="checklist" id="checklist">
+  <label><input type="checkbox" data-key="c1"><span>La nouvelle version des comptes clients (connexion par code e-mail) est active.</span></label>
+  <label><input type="checkbox" data-key="c2"><span>Les retours et annulations en libre-service sont activés (Paramètres &gt; Comptes clients).</span></label>
+  <label><input type="checkbox" data-key="c3"><span>Le délai de retour est de 14 jours minimum, à partir de la livraison du dernier article, avec extension week-ends / jours fériés.</span></label>
+  <label><input type="checkbox" data-key="c4"><span>Les annulations sont possibles jusqu'au traitement (expédition) de l'article.</span></label>
+  <label><input type="checkbox" data-key="c5"><span>Un lien clairement libellé vers l'espace client est présent dans le pied de page (et dans la politique de remboursement).</span></label>
+  <label><input type="checkbox" data-key="c6"><span>Les produits exonérés sont déclarés en articles en vente finale (si applicable).</span></label>
+  <label><input type="checkbox" data-key="c7"><span>La politique écrite de retour et remboursement mentionne le droit de rétractation UE et la marche à suivre.</span></label>
+  <label><input type="checkbox" data-key="c8"><span>Les e-mails de notification de retour ont été vérifiés (et traduits si besoin).</span></label>
+  <label><input type="checkbox" data-key="c9"><span>Un test complet a été réalisé avec une commande réelle ou de test (annulation + retour).</span></label>
+  <label><input type="checkbox" data-key="c10"><span>Le processus interne garantit un remboursement sous 14 jours pour les commandes UE.</span></label>
+</div>
+
+<h2 id="faq">Questions fréquentes</h2>
+<div class="card">
+  <h3>Faut-il installer une application tierce ?</h3>
+  <p>Non, pas nécessairement. Les fonctionnalités natives de Shopify (libre-service + règles de retour et d'annulation) couvrent les exigences de la directive lorsqu'elles sont configurées comme décrit ci-dessus. Des applications dédiées existent sur l'App Store si vous souhaitez un bouton de rétractation plus visible ou un formulaire accessible sans connexion, mais elles ne sont pas obligatoires.</p>
+</div>
+<div class="card">
+  <h3>Ma boutique n'est pas dans l'UE, suis-je concerné ?</h3>
+  <p>Oui, dès lors que vous vendez à des consommateurs situés dans l'UE (livraison vers un pays de l'UE, prix en euros, site traduit pour un marché européen, etc.). Le lieu d'établissement de l'entreprise n'a pas d'importance.</p>
+</div>
+<div class="card">
+  <h3>Le client doit-il donner un motif pour se rétracter ?</h3>
+  <p>Non. Le droit de rétractation de 14 jours s'exerce sans justification. Shopify demande un motif dans le formulaire de retour, mais vous ne pouvez pas refuser une demande UE valable au motif que la raison ne vous convient pas.</p>
+</div>
+<div class="card">
+  <h3>Qui paie les frais de retour ?</h3>
+  <p>Les frais de renvoi peuvent être à la charge du client, à condition que ce soit clairement indiqué avant l'achat (dans votre politique de retour). Le remboursement du prix et des frais de livraison initiaux standard reste dû au client.</p>
+</div>
+<div class="card">
+  <h3>La configuration Shopify me rend-elle automatiquement conforme ?</h3>
+  <p>Non. Shopify le précise lui-même : ces outils aident à répondre aux exigences, mais la conformité dépend de votre configuration complète, de vos produits et de vos marchés. Un contrôle avec un conseiller juridique reste recommandé, notamment pour les produits exonérés et les mentions de votre politique.</p>
+</div>
+
+<h2 id="sources">Sources</h2>
+<ul>
+  <li><a href="https://help.shopify.com/fr/manual/compliance/legal/eu-right-of-withdrawal" target="_blank" rel="noopener">Shopify — Conformité au droit de rétractation de l'UE</a></li>
+  <li><a href="https://help.shopify.com/fr/manual/fulfillment/managing-orders/returns/return-rules" target="_blank" rel="noopener">Shopify — Configuration des règles de retour et d'annulation</a></li>
+  <li><a href="https://help.shopify.com/fr/manual/fulfillment/managing-orders/returns/self-serve-returns/setup" target="_blank" rel="noopener">Shopify — Configuration des retours en libre-service</a></li>
+  <li><a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32023L2673" target="_blank" rel="noopener">EUR-Lex — Directive (UE) 2023/2673</a></li>
+  <li><a href="https://europa.eu/youreurope/citizens/consumers/shopping/returns_en.htm" target="_blank" rel="noopener">Your Europe — Délai de réflexion et droit de rétractation</a></li>
+</ul>
+
+<footer class="doc-footer">
+  Document informatif — dernière mise à jour : juillet 2026. Ne constitue pas un conseil juridique.
+</footer>
+
+</main>
+</div>
+
+<script>
+// ---- Placeholders automatiques pour les captures d'écran ----
+// Si l'image existe dans le dossier images/, elle s'affiche.
+// Sinon, un encart indique le nom de fichier attendu.
+document.querySelectorAll('figure.shot img').forEach(function (img) {
+  img.addEventListener('error', function () {
+    var fname = img.getAttribute('src');
+    var ph = document.createElement('div');
+    ph.className = 'shot-placeholder';
+    ph.innerHTML = 'Capture d’écran à ajouter : placez le fichier <span class="fname">' + fname + '</span> à côté de cette page.';
+    img.replaceWith(ph);
+  });
+});
+
+// ---- Checklist avec progression (sauvegardée dans le navigateur) ----
+(function () {
+  var boxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+  var fill = document.getElementById('progressFill');
+  var label = document.getElementById('progressLabel');
+  var store = null;
+  try { store = window.localStorage; } catch (e) { /* stockage indisponible */ }
+
+  function refresh() {
+    var done = 0;
+    boxes.forEach(function (b) {
+      b.closest('label').classList.toggle('done', b.checked);
+      if (b.checked) done++;
+    });
+    var pct = Math.round(done / boxes.length * 100);
+    fill.style.width = pct + '%';
+    label.textContent = done + ' / ' + boxes.length + ' points validés' + (pct === 100 ? ' — configuration complète' : '');
+  }
+
+  boxes.forEach(function (b) {
+    if (store && store.getItem('retract-' + b.dataset.key) === '1') b.checked = true;
+    b.addEventListener('change', function () {
+      if (store) store.setItem('retract-' + b.dataset.key, b.checked ? '1' : '0');
+      refresh();
+    });
+  });
+  refresh();
+})();
+
+// ---- Surlignage de la section active dans le sommaire ----
+(function () {
+  var links = document.querySelectorAll('nav.toc a');
+  var sections = [];
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) sections.push({ link: a, el: el });
+  });
+  function onScroll() {
+    var current = sections[0];
+    sections.forEach(function (s) {
+      if (s.el.getBoundingClientRect().top < 120) current = s;
+    });
+    links.forEach(function (a) { a.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+Placez vos captures d'écran dans ce dossier avec exactement ces noms (format PNG) :
+
+01-comptes-clients-libre-service.png
+    Paramètres > Comptes clients : activation des retours en libre-service
+
+02-regles-retour.png
+    Paramètres > Politiques : délai de retour 14 jours, à partir de la
+    livraison du dernier article, extension week-ends/jours fériés
+
+03-regles-annulation.png
+    Règles d'annulation : fenêtre "Jusqu'au traitement de l'article"
+
+04-url-comptes-clients.png
+    Paramètres > Comptes clients : l'URL des comptes clients à copier
+
+05-menu-pied-de-page.png
+    Contenu > Menus : ajout du lien "Retours et rétractation" au pied de page
+
+06-regles-par-marche.png
+    Règle de retour spécifique au marché UE (facultatif)
+
+07-parcours-client.png
+    Vue côté client : demande de retour/annulation depuis le compte client
+
+Dès qu'un fichier est présent, il s'affiche automatiquement dans la page
+à la place de l'encart en pointillés. Largeur conseillée : 1200-1600 px.

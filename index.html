@@ -69,13 +69,13 @@
   tr:last-child td { border-bottom: none; }
   /* ---------- Étapes ---------- */
   .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 20px; }
-  .step-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .step-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
   .step-num {
     flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
     background: var(--accent); color: #fff; font-weight: 700; font-size: 15px;
-    display: inline-flex; align-items: center; justify-content: center; transform: translateY(6px);
+    display: inline-flex; align-items: center; justify-content: center;
   }
-  .step-head h3 { margin: 0; font-size: 18px; }
+  .step-head h3 { margin: 0; font-size: 18px; line-height: 30px; }
   .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 8px; }
   .tag.optional { background: var(--warn-soft); color: var(--warn); }
   /* ---------- Captures d'écran ---------- */
@@ -119,6 +119,7 @@
   <a href="#concerne">Qui est concerné</a>
   <a href="#sanctions">Sanctions</a>
   <a href="#mise-en-place">Mise en place dans Shopify</a>
+  <a href="#solutions-tierces">Apps tierces et Global-e</a>
   <a href="#experience-client">Ce que verra le client</a>
   <a href="#checklist">Checklist de conformité</a>
   <a href="#faq">Questions fréquentes</a>
@@ -288,6 +289,30 @@
   </ul>
 </div>
 
+<h2 id="solutions-tierces">Si la boutique utilise une app de retours ou Global-e</h2>
+<p>Beaucoup de boutiques gèrent déjà leurs retours avec un service externe. Dans ce cas, la fonction de rétractation peut passer par ce service plutôt que par le libre-service natif de Shopify, mais certains points restent à vérifier.</p>
+
+<h3>Apps de retours (Baback, Loop Returns, etc.)</h3>
+<p>Les principaux éditeurs ont adapté leur produit à la directive : le portail de retours de l'app peut faire office de fonction de rétractation électronique (Baback, par exemple, annonce une conformité intégrée à son portail de retours existant). Points à vérifier avec chaque app :</p>
+<ul>
+  <li><strong>Les annulations avant expédition</strong> : la plupart des apps de retours ne gèrent que les articles livrés. Si c'est le cas, gardez les <strong>règles d'annulation natives de Shopify</strong> (étapes 1 et 3) actives en complément, pour couvrir la rétractation avant livraison.</li>
+  <li><strong>Le bloc d'app dans le compte client</strong> : ces apps proposent généralement une extension de compte client (app block) à placer sur la page de détail de commande. Ajoutez-le via l'éditeur de personnalisation des comptes clients, pour que le client trouve le point d'entrée là où la directive l'attend.</li>
+  <li><strong>Le lien visible dans la boutique</strong> : le pied de page doit pointer vers le portail de retours de l'app (ou vers le compte client qui contient le bloc), avec un libellé clair de type « Retours et rétractation ».</li>
+  <li><strong>L'accusé de réception</strong> : vérifiez que l'app envoie automatiquement un e-mail horodaté confirmant la demande de rétractation.</li>
+  <li><strong>Le paramétrage du délai</strong> : 14 jours minimum pour les clients UE, à partir de la livraison, sans possibilité de refus discrétionnaire d'une demande UE valable.</li>
+</ul>
+
+<h3>Global-e (ventes internationales)</h3>
+<p>Global-e agit en tant que <strong>marchand officiel (merchant of record)</strong> sur les commandes qu'il traite : c'est donc lui qui est juridiquement le « professionnel » soumis à la directive pour ces commandes, et il affiche ses propres liens de rétractation (checkout, e-mails transactionnels, centre d'aide). Côté configuration :</p>
+<ul>
+  <li>Global-e fournit une <strong>règle « EU Right of Withdrawal » préconstruite</strong> dans sa plateforme de retours, <strong>inactive par défaut : il faut l'activer</strong>.</li>
+  <li>Cette règle applique le périmètre UE, la fenêtre de 14 jours et le remboursement des frais de livraison aller d'origine ; les clients hors UE conservent la politique de retour habituelle.</li>
+  <li>La boutique Shopify doit malgré tout garder un <strong>point d'entrée visible</strong> vers le processus de retour/rétractation, et les commandes non traitées par Global-e (marché domestique, par exemple) restent couvertes par la configuration Shopify décrite plus haut.</li>
+</ul>
+<div class="callout warn">
+  <p>Dans une configuration mixte (Shopify natif + app de retours + Global-e), vérifiez qu'aucun parcours client ne reste sans fonction de rétractation : chaque marché et chaque type de commande doit avoir un chemin clair pour annuler ou retourner.</p>
+</div>
+
 <h2 id="experience-client">Ce que verra le client</h2>
 <p>Une fois la configuration en place, le parcours du client est le suivant :</p>
 <ol>
@@ -319,6 +344,7 @@
   <label><input type="checkbox" data-key="c8"><span>Les e-mails de notification de retour ont été vérifiés (et traduits si besoin).</span></label>
   <label><input type="checkbox" data-key="c9"><span>Un test complet a été réalisé avec une commande réelle ou de test (annulation + retour).</span></label>
   <label><input type="checkbox" data-key="c10"><span>Le processus interne garantit un remboursement sous 14 jours pour les commandes UE.</span></label>
+  <label><input type="checkbox" data-key="c11"><span>Si une app de retours (Baback, Loop...) ou Global-e est utilisée : la règle de rétractation UE du prestataire est activée, le bloc d'app est en place dans le compte client, et les annulations avant expédition sont couvertes.</span></label>
 </div>
 
 <h2 id="faq">Questions fréquentes</h2>
@@ -350,6 +376,7 @@
   <li><a href="https://help.shopify.com/fr/manual/fulfillment/managing-orders/returns/self-serve-returns/setup" target="_blank" rel="noopener">Shopify — Configuration des retours en libre-service</a></li>
   <li><a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32023L2673" target="_blank" rel="noopener">EUR-Lex — Directive (UE) 2023/2673</a></li>
   <li><a href="https://europa.eu/youreurope/citizens/consumers/shopping/returns_en.htm" target="_blank" rel="noopener">Your Europe — Délai de réflexion et droit de rétractation</a></li>
+  <li><a href="https://docs.global-e.com/enterprise/en/legal---compliance.html" target="_blank" rel="noopener">Global-e — Legal &amp; Compliance : EU Right of Withdrawal</a></li>
 </ul>
 
 <footer class="doc-footer">
